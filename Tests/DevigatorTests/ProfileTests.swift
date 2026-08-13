@@ -1,5 +1,4 @@
 import AppKit
-import Carbon.HIToolbox
 import XCTest
 @testable import Devigator
 
@@ -18,7 +17,8 @@ final class ProfileTests: XCTestCase {
         )
 
         XCTAssertNoThrow(try ProfileValidator.validate(catalog))
-        XCTAssertEqual(catalog.profiles.count, 6)
+        XCTAssertEqual(catalog.profiles.count, 7)
+        XCTAssertTrue(catalog.profiles.contains { $0.id == "com.google.android.studio" })
     }
 
     func testCapabilityCatalogIsBilingualAndCoversBuiltInProfiles() throws {
@@ -86,6 +86,34 @@ final class ProfileTests: XCTestCase {
         XCTAssertTrue(ApplicationMatcher.matches(app, matcher: matcher))
     }
 
+    func testAndroidStudioProfileMatchesInstalledBundleIdentifier() throws {
+        let testFile = URL(fileURLWithPath: #filePath)
+        let repositoryRoot = testFile
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+        let catalog = try JSONDecoder().decode(
+            ShortcutCatalog.self,
+            from: Data(contentsOf: repositoryRoot.appendingPathComponent(
+                "Sources/Devigator/Resources/DefaultProfiles.json"
+            ))
+        )
+        let profile = try XCTUnwrap(catalog.profiles.first {
+            $0.id == "com.google.android.studio"
+        })
+        let app = FrontmostApplication(
+            name: "Android Studio",
+            bundleIdentifier: "com.google.android.studio",
+            icon: nil
+        )
+
+        XCTAssertTrue(ApplicationMatcher.matches(app, matcher: profile.application))
+        XCTAssertEqual(
+            profile.groups[0].shortcuts[0].pointerGestures?.first?.modifiers,
+            ["⌘"]
+        )
+    }
+
     func testDuplicateShortcutIsRejected() throws {
         let shortcut = ShortcutProfile.Shortcut(
             id: "definition",
@@ -113,21 +141,6 @@ final class ProfileTests: XCTestCase {
                 .duplicateShortcutID(profile: "test.editor", shortcut: "definition")
             )
         }
-    }
-
-    func testCustomHotKeyDisplayAndSerialization() throws {
-        let binding = HotKeyBinding(
-            keyCode: 2,
-            modifiers: UInt32(controlKey | optionKey | shiftKey),
-            keyLabel: "D"
-        )
-
-        XCTAssertEqual(binding.displayKeys, ["⌃", "⌥", "⇧", "D"])
-        XCTAssertEqual(binding.displayName, "⌃⌥⇧D")
-        XCTAssertEqual(try JSONDecoder().decode(
-            HotKeyBinding.self,
-            from: JSONEncoder().encode(binding)
-        ), binding)
     }
 
     func testPointerGestureRoundTripsInSchema12() throws {

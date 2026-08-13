@@ -38,8 +38,7 @@ final class OverlayPanelController: NSObject {
 
     func show(
         application: FrontmostApplication,
-        loadedProfile: LoadedProfile?,
-        shortcutKeys: [String]
+        loadedProfile: LoadedProfile?
     ) {
         rebuildPanels(application: application, loadedProfile: loadedProfile)
         currentAnchor = nil
@@ -50,8 +49,7 @@ final class OverlayPanelController: NSObject {
 
     func update(
         application: FrontmostApplication,
-        loadedProfile: LoadedProfile?,
-        shortcutKeys: [String]
+        loadedProfile: LoadedProfile?
     ) {
         let wasVisible = isVisible
         rebuildPanels(application: application, loadedProfile: loadedProfile)

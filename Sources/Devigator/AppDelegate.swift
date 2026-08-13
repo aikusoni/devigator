@@ -6,15 +6,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
     private let overlayController = OverlayPanelController()
     private lazy var editorController = ProfileEditorWindowController(store: profileStore)
-    private lazy var globalHotKey = GlobalHotKey { [weak self] in
-        self?.toggleOverlay()
-    }
     private lazy var commandHoldMonitor = CommandHoldMonitor(
         delay: 1.0,
         onBegin: { [weak self] in self?.commandHoldDidBegin() },
         onEnd: { [weak self] in self?.commandHoldDidEnd() }
     )
-    private var currentShortcut = HotKeyBinding.saved
     private var currentPlacement = HUDPlacementMode.saved
     private var commandHoldEnabled: Bool = {
         let defaults = UserDefaults.standard
@@ -23,8 +19,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             : defaults.bool(forKey: "commandHoldEnabled")
     }()
     private var hudShownByCommandHold = false
-    private weak var showOverlayMenuItem: NSMenuItem?
-    private weak var shortcutMenu: NSMenu?
     private weak var placementMenu: NSMenu?
     private weak var commandHoldMenuItem: NSMenuItem?
     private var activationObserver: NSObjectProtocol?
@@ -35,11 +29,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         overlayController.setPlacementMode(currentPlacement)
         observeFrontmostApplication()
 
-        do {
-            try globalHotKey.register(currentShortcut)
-        } catch {
-            showError(error.localizedDescription)
-        }
         if commandHoldEnabled { commandHoldMonitor.start() }
 
         if CommandLine.arguments.contains("--preview") {
@@ -88,8 +77,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         overlayController.show(
             application: application,
-            loadedProfile: profileStore.profile(for: application),
-            shortcutKeys: currentShortcut.displayKeys
+            loadedProfile: profileStore.profile(for: application)
         )
         return true
     }
@@ -135,21 +123,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         let menu = NSMenu()
         let show = NSMenuItem(
-            title: "오버레이 보기 (\(currentShortcut.displayName))",
+            title: "오버레이 보기",
             action: #selector(toggleOverlay),
             keyEquivalent: ""
         )
         show.target = self
-        showOverlayMenuItem = show
         menu.addItem(show)
         menu.addItem(.separator())
-
-        let shortcutRoot = NSMenuItem(title: "호출 단축키", action: nil, keyEquivalent: "")
-        let shortcutSubmenu = NSMenu(title: "호출 단축키")
-        shortcutMenu = shortcutSubmenu
-        shortcutRoot.submenu = shortcutSubmenu
-        menu.addItem(shortcutRoot)
-        rebuildShortcutMenu()
 
         let commandHold = NSMenuItem(
             title: "⌘ 길게 눌러 표시",
@@ -186,76 +166,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         quit.target = self
         menu.addItem(quit)
         statusItem.menu = menu
-    }
-
-    private func rebuildShortcutMenu() {
-        shortcutMenu?.removeAllItems()
-        for preset in GlobalShortcutPreset.allCases {
-            let item = NSMenuItem(
-                title: preset.binding.displayName,
-                action: #selector(selectShortcut(_:)),
-                keyEquivalent: ""
-            )
-            item.target = self
-            item.representedObject = preset.rawValue
-            item.state = preset.binding == currentShortcut ? .on : .off
-            shortcutMenu?.addItem(item)
-        }
-        shortcutMenu?.addItem(.separator())
-        let custom = NSMenuItem(
-            title: "직접 입력…",
-            action: #selector(recordCustomShortcut),
-            keyEquivalent: ""
-        )
-        custom.target = self
-        custom.state = GlobalShortcutPreset.allCases.contains(where: { $0.binding == currentShortcut })
-            ? .off
-            : .on
-        shortcutMenu?.addItem(custom)
-    }
-
-    @objc private func selectShortcut(_ sender: NSMenuItem) {
-        guard let rawValue = sender.representedObject as? String,
-              let selected = GlobalShortcutPreset(rawValue: rawValue),
-              selected.binding != currentShortcut else { return }
-
-        applyShortcut(selected.binding)
-    }
-
-    @objc private func recordCustomShortcut() {
-        overlayController.hide()
-        hudShownByCommandHold = false
-        NSApplication.shared.activate(ignoringOtherApps: true)
-
-        let recorder = ShortcutRecorderView(initialBinding: currentShortcut)
-        let alert = NSAlert()
-        alert.messageText = "호출 단축키 직접 입력"
-        alert.informativeText = "원하는 조합을 누르세요. 일반 입력을 방해하지 않도록 조합키가 하나 이상 필요합니다."
-        alert.accessoryView = recorder
-        alert.addButton(withTitle: "저장")
-        alert.addButton(withTitle: "취소")
-        alert.window.initialFirstResponder = recorder
-        guard alert.runModal() == .alertFirstButtonReturn else { return }
-        applyShortcut(recorder.recordedBinding)
-    }
-
-    private func applyShortcut(_ selected: HotKeyBinding) {
-        let previous = currentShortcut
-        do {
-            try globalHotKey.register(selected)
-            currentShortcut = selected
-            selected.save()
-            showOverlayMenuItem?.title = "오버레이 보기 (\(selected.displayName))"
-            rebuildShortcutMenu()
-
-            if overlayController.isVisible,
-               let runningApplication = currentExternalApplication() {
-                frontmostApplicationDidChange(to: runningApplication)
-            }
-        } catch {
-            try? globalHotKey.register(previous)
-            showError("\(selected.displayName)은 다른 앱에서 사용 중일 수 있습니다.\n\n\(error.localizedDescription)")
-        }
     }
 
     @objc private func toggleCommandHold() {
@@ -345,8 +255,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         overlayController.update(
             application: application,
-            loadedProfile: profileStore.profile(for: application),
-            shortcutKeys: currentShortcut.displayKeys
+            loadedProfile: profileStore.profile(for: application)
         )
     }
 
@@ -371,8 +280,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         overlayController.show(
             application: application,
-            loadedProfile: profileStore.profile(for: application),
-            shortcutKeys: currentShortcut.displayKeys
+            loadedProfile: profileStore.profile(for: application)
         )
     }
 }

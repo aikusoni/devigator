@@ -222,6 +222,54 @@
       ]
     },
     {
+      "id": "com.google.android.studio",
+      "name": "Android Studio",
+      "application": {
+        "bundleIdentifiers": ["com.google.android.studio"],
+        "bundleIdentifierPatterns": ["com.google.android.studio*"],
+        "applicationNames": ["Android Studio", "Android Studio Preview", "Android Studio Canary"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://developer.android.com/studio/intro/keyboard-shortcuts",
+        "description": "Android Studio macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-declaration", "action": "선언으로 이동", "capabilityID": "code.definition", "keys": ["⌘", "B"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
+            {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
+            {"id": "quick-definition", "action": "빠른 정의 보기", "capabilityID": "code.definition.peek", "keys": ["⌘", "Y"], "tags": ["navigation"], "commandID": "QuickImplementations"}
+          ]
+        },
+        {
+          "id": "search",
+          "title": "검색",
+          "categoryID": "search.workspace",
+          "shortcuts": [
+            {"id": "search-everywhere", "action": "전체 검색", "capabilityID": "search.everywhere", "keys": ["⇧", "⇧"], "description": "Shift 두 번", "tags": ["search"], "commandID": "SearchEverywhere"},
+            {"id": "find-class", "action": "클래스 찾기", "capabilityID": "navigation.symbol", "keys": ["⌘", "O"], "tags": ["search"], "commandID": "GotoClass"},
+            {"id": "find-file", "action": "파일 찾기", "capabilityID": "navigation.file", "keys": ["⇧", "⌘", "O"], "tags": ["search"], "commandID": "GotoFile"},
+            {"id": "file-structure", "action": "파일 구조", "capabilityID": "navigation.outline", "keys": ["⌘", "F12"], "tags": ["navigation"], "commandID": "FileStructurePopup"}
+          ]
+        },
+        {
+          "id": "hierarchy",
+          "title": "계층",
+          "categoryID": "code.navigation.hierarchy",
+          "shortcuts": [
+            {"id": "call-hierarchy", "action": "호출 계층", "capabilityID": "code.hierarchy.call", "keys": ["⌃", "⌥", "H"], "tags": ["hierarchy"], "commandID": "CallHierarchy"},
+            {"id": "type-hierarchy", "action": "타입 계층", "capabilityID": "code.hierarchy.type", "keys": ["⌃", "H"], "tags": ["hierarchy"], "commandID": "TypeHierarchy"}
+          ]
+        }
+      ]
+    },
+    {
       "id": "org.eclipse.platform.ide",
       "name": "Eclipse IDE",
       "application": {

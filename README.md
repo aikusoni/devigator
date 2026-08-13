@@ -1,6 +1,6 @@
 # Devigator
 
-Devigator is a universal macOS shortcut overlay for code navigation. Press `⌥⇧ Space` and it detects the frontmost editor, then shows a focused set of navigation, usage, hierarchy, search, and history shortcuts.
+Devigator is a universal macOS shortcut overlay for code navigation. Hold `⌘` by itself for about 1 second and it detects the frontmost editor, then shows a focused set of navigation, usage, hierarchy, search, and history shortcuts.
 
 > **Built with AI** — Devigator was created with OpenAI Codex. Its source, shortcut data, and generated distribution artifacts should be reviewed and tested before production use.
 
@@ -13,6 +13,7 @@ The MVP includes profiles for:
 - IntelliJ IDEA
 - WebStorm
 - PyCharm
+- Android Studio
 - Eclipse IDE
 
 ## Build and run
@@ -33,9 +34,7 @@ Create local distribution artifacts with:
 
 This produces a drag-to-Applications DMG, a macOS ZIP, and SHA-256 checksums under `dist/`. Local artifacts use ad-hoc signing; public distribution additionally requires Developer ID signing and Apple notarization.
 
-Devigator runs as a menu bar app. Its default global shortcut is `Option + Shift + Space`. Invoke the shortcut again or click the close button to hide the overlay. Choose **호출 단축키 → 직접 입력…** to record any modified key combination; the preset list remains available for quick setup.
-
-Holding Command by itself for about 1 second temporarily shows the HUD, and releasing Command hides it. Pressing another key or modifier cancels the hold gesture so normal shortcuts such as `⌘C` are unaffected. The behavior can be disabled with **⌘ 길게 눌러 표시** in the menu bar.
+Devigator runs as a menu bar app. Holding Command by itself for about 1 second temporarily shows the HUD, and releasing Command hides it. Pressing another key or modifier cancels the hold gesture so normal shortcuts such as `⌘C` are unaffected. The behavior can be disabled with **⌘ 길게 눌러 표시** in the menu bar; **오버레이 보기** remains available for manual display.
 
 While visible, the HUD stays above normal and full-screen application windows. Switching applications updates the HUD immediately to the newly focused editor without closing it.
 
