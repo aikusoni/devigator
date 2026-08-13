@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devigator.app/schemas/capability-catalog-1.0.json",
+  "title": "Devigator Capability Catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "categories", "capabilities"],
+  "properties": {
+    "schemaVersion": {"const": "1.0"},
+    "categories": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/category"}
+    },
+    "capabilities": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/capability"}
+    }
+  },
+  "$defs": {
+    "localizedText": {
+      "type": "object",
+      "additionalProperties": {"type": "string", "minLength": 1},
+      "required": ["en", "ko"],
+      "properties": {
+        "en": {"type": "string", "minLength": 1},
+        "ko": {"type": "string", "minLength": 1}
+      }
+    },
+    "category": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "labels"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-zA-Z0-9]*(\\.[a-zA-Z][a-zA-Z0-9]*)+$"},
+        "labels": {"$ref": "#/$defs/localizedText"},
+        "descriptions": {"$ref": "#/$defs/localizedText"}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "categoryID", "labels"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z][a-zA-Z0-9]*(\\.[a-zA-Z][a-zA-Z0-9]*)+$"},
+        "categoryID": {"type": "string", "minLength": 1},
+        "labels": {"$ref": "#/$defs/localizedText"},
+        "descriptions": {"$ref": "#/$defs/localizedText"}
+      }
+    }
+  }
+}

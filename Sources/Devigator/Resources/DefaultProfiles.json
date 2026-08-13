@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "1.1",
+  "profiles": [
+    {
+      "id": "com.apple.dt.xcode",
+      "name": "Xcode",
+      "application": {
+        "bundleIdentifiers": ["com.apple.dt.Xcode"],
+        "bundleIdentifierPatterns": ["com.apple.dt.Xcode.*"],
+        "applicationNames": ["Xcode"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://developer.apple.com/xcode/",
+        "description": "Xcode 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["⌃", "⌘", "J"], "tags": ["navigation"]},
+            {"id": "open-quickly", "action": "빠르게 열기", "capabilityID": "search.everywhere", "keys": ["⇧", "⌘", "O"], "tags": ["search"]},
+            {"id": "related-items", "action": "관련 항목", "capabilityID": "code.related", "keys": ["⌃", "1"], "tags": ["navigation"]}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌃", "⌘", "←"], "tags": ["history"]},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌃", "⌘", "→"], "tags": ["history"]}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.microsoft.vscode",
+      "name": "Visual Studio Code",
+      "application": {
+        "bundleIdentifiers": ["com.microsoft.VSCode", "com.microsoft.VSCodeInsiders"],
+        "bundleIdentifierPatterns": ["com.microsoft.VSCode.*"],
+        "applicationNames": ["Visual Studio Code", "Visual Studio Code - Insiders"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://code.visualstudio.com/",
+        "description": "VS Code macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["F12"], "tags": ["navigation"], "commandID": "editor.action.revealDefinition"},
+            {"id": "peek-definition", "action": "정의 미리보기", "capabilityID": "code.definition.peek", "keys": ["⌥", "F12"], "tags": ["navigation"], "commandID": "editor.action.peekDefinition"},
+            {"id": "go-to-references", "action": "참조로 이동", "capabilityID": "code.references", "keys": ["⇧", "F12"], "tags": ["usages"], "commandID": "editor.action.goToReferences"}
+          ]
+        },
+        {
+          "id": "search",
+          "title": "검색",
+          "categoryID": "search.workspace",
+          "shortcuts": [
+            {"id": "go-to-file", "action": "파일로 이동", "capabilityID": "navigation.file", "keys": ["⌘", "P"], "tags": ["search"], "commandID": "workbench.action.quickOpen"},
+            {"id": "go-to-symbol", "action": "워크스페이스 심볼", "capabilityID": "navigation.symbol", "keys": ["⌘", "T"], "tags": ["search"], "commandID": "workbench.action.showAllSymbols"}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌃", "-"], "tags": ["history"], "commandID": "workbench.action.navigateBack"},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌃", "⇧", "-"], "tags": ["history"], "commandID": "workbench.action.navigateForward"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.jetbrains.intellij",
+      "name": "IntelliJ IDEA",
+      "application": {
+        "bundleIdentifiers": ["com.jetbrains.intellij", "com.jetbrains.intellij.ce"],
+        "bundleIdentifierPatterns": ["com.jetbrains.intellij*"],
+        "applicationNames": ["IntelliJ IDEA", "IntelliJ IDEA CE"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://www.jetbrains.com/idea/",
+        "description": "IntelliJ IDEA macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
+            {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
+            {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
+          ]
+        },
+        {
+          "id": "hierarchy",
+          "title": "계층",
+          "categoryID": "code.navigation.hierarchy",
+          "shortcuts": [
+            {"id": "call-hierarchy", "action": "호출 계층", "capabilityID": "code.hierarchy.call", "keys": ["⌃", "⌥", "H"], "tags": ["hierarchy"], "commandID": "CallHierarchy"},
+            {"id": "type-hierarchy", "action": "타입 계층", "capabilityID": "code.hierarchy.type", "keys": ["⌃", "H"], "tags": ["hierarchy"], "commandID": "TypeHierarchy"}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌘", "["], "tags": ["history"], "commandID": "Back"},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌘", "]"], "tags": ["history"], "commandID": "Forward"},
+            {"id": "recent-locations", "action": "최근 위치", "capabilityID": "navigation.recent", "keys": ["⇧", "⌘", "E"], "tags": ["history"], "commandID": "RecentLocations"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.jetbrains.webstorm",
+      "name": "WebStorm",
+      "application": {
+        "bundleIdentifiers": ["com.jetbrains.WebStorm"],
+        "bundleIdentifierPatterns": ["com.jetbrains.WebStorm*"],
+        "applicationNames": ["WebStorm"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://www.jetbrains.com/webstorm/",
+        "description": "WebStorm macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
+            {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
+            {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
+          ]
+        },
+        {
+          "id": "hierarchy",
+          "title": "계층과 검색",
+          "categoryID": "code.navigation.hierarchy",
+          "shortcuts": [
+            {"id": "call-hierarchy", "action": "호출 계층", "capabilityID": "code.hierarchy.call", "keys": ["⌃", "⌥", "H"], "tags": ["hierarchy"], "commandID": "CallHierarchy"},
+            {"id": "search-everywhere", "action": "전체 검색", "capabilityID": "search.everywhere", "keys": ["⇧", "⇧"], "description": "Shift 두 번", "tags": ["search"], "commandID": "SearchEverywhere"}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌘", "["], "tags": ["history"], "commandID": "Back"},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌘", "]"], "tags": ["history"], "commandID": "Forward"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "com.jetbrains.pycharm",
+      "name": "PyCharm",
+      "application": {
+        "bundleIdentifiers": ["com.jetbrains.pycharm", "com.jetbrains.pycharm.ce"],
+        "bundleIdentifierPatterns": ["com.jetbrains.pycharm*"],
+        "applicationNames": ["PyCharm", "PyCharm CE"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://www.jetbrains.com/pycharm/",
+        "description": "PyCharm macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
+            {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
+            {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
+          ]
+        },
+        {
+          "id": "hierarchy",
+          "title": "계층과 검색",
+          "categoryID": "code.navigation.hierarchy",
+          "shortcuts": [
+            {"id": "call-hierarchy", "action": "호출 계층", "capabilityID": "code.hierarchy.call", "keys": ["⌃", "⌥", "H"], "tags": ["hierarchy"], "commandID": "CallHierarchy"},
+            {"id": "search-everywhere", "action": "전체 검색", "capabilityID": "search.everywhere", "keys": ["⇧", "⇧"], "description": "Shift 두 번", "tags": ["search"], "commandID": "SearchEverywhere"}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌘", "["], "tags": ["history"], "commandID": "Back"},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌘", "]"], "tags": ["history"], "commandID": "Forward"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "org.eclipse.platform.ide",
+      "name": "Eclipse IDE",
+      "application": {
+        "bundleIdentifiers": ["org.eclipse.platform.ide"],
+        "bundleIdentifierPatterns": ["org.eclipse.*"],
+        "applicationNames": ["Eclipse", "Eclipse IDE"]
+      },
+      "metadata": {
+        "version": "1.0.0",
+        "author": "Devigator",
+        "homepage": "https://www.eclipse.org/ide/",
+        "description": "Eclipse IDE macOS 기본 키맵의 코드 탐색 단축키"
+      },
+      "groups": [
+        {
+          "id": "symbol-navigation",
+          "title": "심볼 탐색",
+          "categoryID": "code.navigation.symbol",
+          "shortcuts": [
+            {"id": "open-declaration", "action": "선언 열기", "capabilityID": "code.definition", "keys": ["F3"], "tags": ["navigation"]},
+            {"id": "open-type", "action": "타입 열기", "capabilityID": "navigation.symbol", "keys": ["⇧", "⌘", "T"], "tags": ["search"]},
+            {"id": "quick-outline", "action": "빠른 아웃라인", "capabilityID": "navigation.outline", "keys": ["⌘", "O"], "tags": ["navigation"]},
+            {"id": "references-workspace", "action": "워크스페이스 참조", "capabilityID": "code.references", "keys": ["⇧", "⌘", "G"], "tags": ["usages"]}
+          ]
+        },
+        {
+          "id": "hierarchy",
+          "title": "계층",
+          "categoryID": "code.navigation.hierarchy",
+          "shortcuts": [
+            {"id": "call-hierarchy", "action": "호출 계층", "capabilityID": "code.hierarchy.call", "keys": ["⌃", "⌥", "H"], "tags": ["hierarchy"]},
+            {"id": "quick-type-hierarchy", "action": "빠른 타입 계층", "capabilityID": "code.hierarchy.type", "keys": ["⌃", "T"], "tags": ["hierarchy"]}
+          ]
+        },
+        {
+          "id": "history",
+          "title": "이동 기록",
+          "categoryID": "navigation.history",
+          "shortcuts": [
+            {"id": "navigate-back", "action": "이전 위치", "capabilityID": "navigation.back", "keys": ["⌘", "["], "tags": ["history"]},
+            {"id": "navigate-forward", "action": "다음 위치", "capabilityID": "navigation.forward", "keys": ["⌘", "]"], "tags": ["history"]}
+          ]
+        }
+      ]
+    }
+  ]
+}

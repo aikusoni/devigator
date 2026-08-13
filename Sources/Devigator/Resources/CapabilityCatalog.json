@@ -1,0 +1,109 @@
+{
+  "schemaVersion": "1.0",
+  "categories": [
+    {
+      "id": "code.navigation.symbol",
+      "labels": {"en": "Symbol Navigation", "ko": "심볼 탐색"},
+      "descriptions": {"en": "Move between declarations, definitions, and related symbols.", "ko": "선언, 정의 및 관련 심볼 사이를 이동합니다."}
+    },
+    {
+      "id": "code.navigation.usage",
+      "labels": {"en": "Usages & References", "ko": "사용처와 참조"},
+      "descriptions": {"en": "Find where the selected symbol is referenced.", "ko": "선택한 심볼이 참조되는 위치를 찾습니다."}
+    },
+    {
+      "id": "code.navigation.hierarchy",
+      "labels": {"en": "Code Hierarchy", "ko": "코드 계층"},
+      "descriptions": {"en": "Explore call and type relationships.", "ko": "호출 및 타입 관계를 탐색합니다."}
+    },
+    {
+      "id": "navigation.history",
+      "labels": {"en": "Navigation History", "ko": "이동 기록"},
+      "descriptions": {"en": "Move through previously visited code locations.", "ko": "이전에 방문한 코드 위치 사이를 이동합니다."}
+    },
+    {
+      "id": "search.workspace",
+      "labels": {"en": "Workspace Search", "ko": "워크스페이스 검색"},
+      "descriptions": {"en": "Find files, symbols, and actions in the workspace.", "ko": "워크스페이스에서 파일, 심볼 및 기능을 찾습니다."}
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "code.definition",
+      "categoryID": "code.navigation.symbol",
+      "labels": {"en": "Go to Definition", "ko": "정의로 이동"},
+      "descriptions": {"en": "Open the definition of the symbol at the caret.", "ko": "커서가 놓인 심볼의 정의를 엽니다."}
+    },
+    {
+      "id": "code.definition.peek",
+      "categoryID": "code.navigation.symbol",
+      "labels": {"en": "Peek Definition", "ko": "정의 미리보기"}
+    },
+    {
+      "id": "code.implementation",
+      "categoryID": "code.navigation.symbol",
+      "labels": {"en": "Go to Implementation", "ko": "구현으로 이동"}
+    },
+    {
+      "id": "code.related",
+      "categoryID": "code.navigation.symbol",
+      "labels": {"en": "Related Symbols", "ko": "관련 심볼"}
+    },
+    {
+      "id": "code.references",
+      "categoryID": "code.navigation.usage",
+      "labels": {"en": "Find References", "ko": "참조 찾기"},
+      "descriptions": {"en": "Find locations that reference the selected symbol.", "ko": "선택한 심볼을 참조하는 위치를 찾습니다."}
+    },
+    {
+      "id": "code.references.peek",
+      "categoryID": "code.navigation.usage",
+      "labels": {"en": "Peek References", "ko": "참조 미리보기"}
+    },
+    {
+      "id": "code.hierarchy.call",
+      "categoryID": "code.navigation.hierarchy",
+      "labels": {"en": "Call Hierarchy", "ko": "호출 계층"}
+    },
+    {
+      "id": "code.hierarchy.type",
+      "categoryID": "code.navigation.hierarchy",
+      "labels": {"en": "Type Hierarchy", "ko": "타입 계층"}
+    },
+    {
+      "id": "navigation.file",
+      "categoryID": "search.workspace",
+      "labels": {"en": "Go to File", "ko": "파일로 이동"}
+    },
+    {
+      "id": "navigation.symbol",
+      "categoryID": "search.workspace",
+      "labels": {"en": "Go to Symbol", "ko": "심볼로 이동"}
+    },
+    {
+      "id": "navigation.outline",
+      "categoryID": "code.navigation.symbol",
+      "labels": {"en": "Quick Outline", "ko": "빠른 아웃라인"}
+    },
+    {
+      "id": "navigation.back",
+      "categoryID": "navigation.history",
+      "labels": {"en": "Navigate Back", "ko": "이전 위치"}
+    },
+    {
+      "id": "navigation.forward",
+      "categoryID": "navigation.history",
+      "labels": {"en": "Navigate Forward", "ko": "다음 위치"}
+    },
+    {
+      "id": "navigation.recent",
+      "categoryID": "navigation.history",
+      "labels": {"en": "Recent Locations", "ko": "최근 위치"}
+    },
+    {
+      "id": "search.everywhere",
+      "categoryID": "search.workspace",
+      "labels": {"en": "Search Everywhere", "ko": "전체 검색"}
+    }
+  ]
+}

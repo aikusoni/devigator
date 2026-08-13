@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://devigator.app/schemas/profile-1.1.json",
+  "title": "Devigator Shortcut Profile Catalog",
+  "description": "Portable shortcut profiles for Devigator-compatible editors and providers.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "profiles"],
+  "properties": {
+    "schemaVersion": {"enum": ["1.0", "1.1"]},
+    "profiles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/profile"}
+    }
+  },
+  "$defs": {
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "application", "metadata", "groups"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "priority": {"type": "integer", "minimum": -100, "maximum": 100, "default": 0},
+        "application": {"$ref": "#/$defs/applicationMatcher"},
+        "metadata": {"$ref": "#/$defs/metadata"},
+        "groups": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/group"}
+        }
+      }
+    },
+    "applicationMatcher": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "bundleIdentifiers": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "default": []
+        },
+        "bundleIdentifierPatterns": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "default": []
+        },
+        "applicationNames": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "default": []
+        }
+      },
+      "anyOf": [
+        {"required": ["bundleIdentifiers"], "properties": {"bundleIdentifiers": {"minItems": 1}}},
+        {"required": ["bundleIdentifierPatterns"], "properties": {"bundleIdentifierPatterns": {"minItems": 1}}},
+        {"required": ["applicationNames"], "properties": {"applicationNames": {"minItems": 1}}}
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["version", "author"],
+      "properties": {
+        "version": {"type": "string", "minLength": 1},
+        "author": {"type": "string", "minLength": 1},
+        "homepage": {"type": "string", "format": "uri"},
+        "description": {"type": "string"}
+      }
+    },
+    "group": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "shortcuts"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "title": {"type": "string", "minLength": 1},
+        "categoryID": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical group identifier from the Devigator capability catalog."
+        },
+        "shortcuts": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/shortcut"}
+        }
+      }
+    },
+    "shortcut": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "action", "keys"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "action": {"type": "string", "minLength": 1},
+        "keys": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "description": {"type": "string"},
+        "tags": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "commandID": {
+          "type": "string",
+          "description": "Stable command identifier from the editor, when one exists."
+        },
+        "capabilityID": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Canonical editor-independent capability identifier."
+        },
+        "when": {
+          "type": "string",
+          "description": "Provider-defined context expression. Devigator 1.x preserves this field but does not evaluate it."
+        }
+      }
+    }
+  }
+}
