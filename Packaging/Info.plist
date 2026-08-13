@@ -10,6 +10,8 @@
     <string>app.devigator.macos</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
     <key>CFBundleName</key>
     <string>Devigator</string>
     <key>CFBundlePackageType</key>

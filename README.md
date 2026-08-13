@@ -2,6 +2,10 @@
 
 Devigator is a universal macOS shortcut overlay for code navigation. Press `⌥⇧ Space` and it detects the frontmost editor, then shows a focused set of navigation, usage, hierarchy, search, and history shortcuts.
 
+> **Built with AI** — Devigator was created with OpenAI Codex. Its source, shortcut data, and generated distribution artifacts should be reviewed and tested before production use.
+
+![Devigator app icon](Assets/AppIcon.png)
+
 The MVP includes profiles for:
 
 - Xcode
