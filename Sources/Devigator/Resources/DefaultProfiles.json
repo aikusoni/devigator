@@ -1,5 +1,5 @@
 {
-  "schemaVersion": "1.1",
+  "schemaVersion": "1.2",
   "profiles": [
     {
       "id": "com.apple.dt.xcode",
@@ -21,7 +21,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["⌃", "⌘", "J"], "tags": ["navigation"]},
+            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["⌃", "⌘", "J"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"]},
             {"id": "open-quickly", "action": "빠르게 열기", "capabilityID": "search.everywhere", "keys": ["⇧", "⌘", "O"], "tags": ["search"]},
             {"id": "related-items", "action": "관련 항목", "capabilityID": "code.related", "keys": ["⌃", "1"], "tags": ["navigation"]}
           ]
@@ -57,7 +57,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["F12"], "tags": ["navigation"], "commandID": "editor.action.revealDefinition"},
+            {"id": "go-to-definition", "action": "정의로 이동", "capabilityID": "code.definition", "keys": ["F12"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"], "commandID": "editor.action.revealDefinition"},
             {"id": "peek-definition", "action": "정의 미리보기", "capabilityID": "code.definition.peek", "keys": ["⌥", "F12"], "tags": ["navigation"], "commandID": "editor.action.peekDefinition"},
             {"id": "go-to-references", "action": "참조로 이동", "capabilityID": "code.references", "keys": ["⇧", "F12"], "tags": ["usages"], "commandID": "editor.action.goToReferences"}
           ]
@@ -102,7 +102,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"], "commandID": "GotoDeclaration"},
             {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
             {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
             {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
@@ -149,7 +149,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"], "commandID": "GotoDeclaration"},
             {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
             {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
             {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
@@ -195,7 +195,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "tags": ["navigation"], "commandID": "GotoDeclaration"},
+            {"id": "go-to-declaration", "action": "선언 또는 사용처", "capabilityID": "code.definition", "keys": ["⌘", "B"], "pointerGestures": [{"modifiers": ["⌘"], "button": "primary", "clickCount": 1}], "tags": ["navigation"], "commandID": "GotoDeclaration"},
             {"id": "go-to-implementation", "action": "구현으로 이동", "capabilityID": "code.implementation", "keys": ["⌥", "⌘", "B"], "tags": ["navigation"], "commandID": "GotoImplementation"},
             {"id": "find-usages", "action": "사용처 찾기", "capabilityID": "code.references", "keys": ["⌥", "F7"], "tags": ["usages"], "commandID": "FindUsages"},
             {"id": "show-usages", "action": "사용처 팝업", "capabilityID": "code.references.peek", "keys": ["⌥", "⌘", "F7"], "tags": ["usages"], "commandID": "ShowUsages"}
@@ -241,7 +241,7 @@
           "title": "심볼 탐색",
           "categoryID": "code.navigation.symbol",
           "shortcuts": [
-            {"id": "open-declaration", "action": "선언 열기", "capabilityID": "code.definition", "keys": ["F3"], "tags": ["navigation"]},
+            {"id": "open-declaration", "action": "선언 열기", "capabilityID": "code.definition", "keys": ["F3"], "pointerGestures": [{"modifiers": ["⌃"], "button": "primary", "clickCount": 1}], "tags": ["navigation"]},
             {"id": "open-type", "action": "타입 열기", "capabilityID": "navigation.symbol", "keys": ["⇧", "⌘", "T"], "tags": ["search"]},
             {"id": "quick-outline", "action": "빠른 아웃라인", "capabilityID": "navigation.outline", "keys": ["⌘", "O"], "tags": ["navigation"]},
             {"id": "references-workspace", "action": "워크스페이스 참조", "capabilityID": "code.references", "keys": ["⇧", "⌘", "G"], "tags": ["usages"]}

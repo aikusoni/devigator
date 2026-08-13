@@ -130,6 +130,60 @@ final class ProfileTests: XCTestCase {
         ), binding)
     }
 
+    func testPointerGestureRoundTripsInSchema12() throws {
+        let gesture = ShortcutProfile.Shortcut.PointerGesture(
+            modifiers: ["⌘"],
+            button: .primary,
+            clickCount: 1
+        )
+        let shortcut = ShortcutProfile.Shortcut(
+            id: "definition",
+            action: "Definition",
+            keys: ["F12"],
+            pointerGestures: [gesture]
+        )
+        let profile = ShortcutProfile(
+            id: "test.editor",
+            name: "Test",
+            application: .init(bundleIdentifiers: ["test.editor"]),
+            metadata: .init(version: "1.0.0", author: "Test"),
+            groups: [.init(id: "navigation", title: "Navigation", shortcuts: [shortcut])]
+        )
+        let original = ShortcutCatalog(schemaVersion: "1.2", profiles: [profile])
+        let decoded = try JSONDecoder().decode(
+            ShortcutCatalog.self,
+            from: JSONEncoder().encode(original)
+        )
+
+        XCTAssertNoThrow(try ProfileValidator.validate(decoded))
+        XCTAssertEqual(decoded.profiles[0].groups[0].shortcuts[0].pointerGestures, [gesture])
+    }
+
+    func testInvalidPointerGestureIsRejected() {
+        let shortcut = ShortcutProfile.Shortcut(
+            id: "definition",
+            action: "Definition",
+            keys: ["F12"],
+            pointerGestures: [.init(modifiers: ["⌘"], button: .primary, clickCount: 0)]
+        )
+        let profile = ShortcutProfile(
+            id: "test.editor",
+            name: "Test",
+            application: .init(bundleIdentifiers: ["test.editor"]),
+            metadata: .init(version: "1.0.0", author: "Test"),
+            groups: [.init(id: "navigation", title: "Navigation", shortcuts: [shortcut])]
+        )
+
+        XCTAssertThrowsError(
+            try ProfileValidator.validate(ShortcutCatalog(schemaVersion: "1.2", profiles: [profile]))
+        ) { error in
+            XCTAssertEqual(
+                error as? ProfileValidationError,
+                .invalidPointerGesture(profile: "test.editor", shortcut: "definition")
+            )
+        }
+    }
+
     @MainActor
     func testUserProfileOverridesProviderProfile() throws {
         let root = FileManager.default.temporaryDirectory

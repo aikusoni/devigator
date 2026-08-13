@@ -48,7 +48,7 @@ struct ShortcutGroupOverlayView: View {
                             .shadow(color: .black, radius: 4, x: 0, y: 1)
 
                         Spacer(minLength: 12)
-                        FloatingKeyCaps(keys: shortcut.keys, accent: accent)
+                        FloatingInputHints(shortcut: shortcut, accent: accent)
                     }
                     .frame(minHeight: 31)
                 }
@@ -145,6 +145,75 @@ private struct FloatingKeyCaps: View {
         if key.count >= 4 { return 42 }
         if key.count >= 2 { return 33 }
         return 27
+    }
+}
+
+private struct FloatingInputHints: View {
+    let shortcut: ShortcutProfile.Shortcut
+    let accent: Color
+
+    var body: some View {
+        HStack(spacing: 5) {
+            FloatingKeyCaps(keys: shortcut.keys, accent: accent)
+            ForEach(Array((shortcut.pointerGestures ?? []).enumerated()), id: \.offset) { _, gesture in
+                Text("/")
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.48))
+                FloatingPointerGesture(gesture: gesture, accent: accent)
+            }
+        }
+    }
+}
+
+private struct FloatingPointerGesture: View {
+    let gesture: ShortcutProfile.Shortcut.PointerGesture
+    let accent: Color
+
+    var body: some View {
+        HStack(spacing: 4) {
+            FloatingKeyCaps(keys: gesture.modifiers, accent: accent)
+            HStack(spacing: 2) {
+                if gesture.button != .primary {
+                    Text(gesture.button == .secondary ? "R" : "M")
+                        .font(.system(size: 8, weight: .heavy, design: .rounded))
+                }
+                Image(systemName: "cursorarrow.click")
+                    .font(.system(size: 13, weight: .bold))
+                if gesture.clickCount > 1 {
+                    Text("\(gesture.clickCount)×")
+                        .font(.system(size: 8, weight: .heavy, design: .rounded))
+                }
+            }
+            .foregroundStyle(.white)
+            .frame(minWidth: 27, minHeight: 27)
+            .padding(.horizontal, gesture.clickCount > 1 ? 3 : 0)
+            .background(
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .fill(.black.opacity(0.28))
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                    .strokeBorder(
+                        LinearGradient(
+                            colors: [.white.opacity(0.28), accent.opacity(0.28)],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        ),
+                        lineWidth: 1
+                    )
+            }
+            .shadow(color: .black.opacity(0.82), radius: 3, x: 0, y: 2)
+            .accessibilityLabel(accessibilityLabel)
+        }
+    }
+
+    private var accessibilityLabel: String {
+        let button = switch gesture.button {
+        case .primary: "primary"
+        case .secondary: "secondary"
+        case .middle: "middle"
+        }
+        return "\(button) click \(gesture.clickCount) time(s)"
     }
 }
 

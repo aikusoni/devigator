@@ -1,13 +1,13 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://devigator.app/schemas/profile-1.1.json",
+  "$id": "https://devigator.app/schemas/profile-1.2.json",
   "title": "Devigator Shortcut Profile Catalog",
   "description": "Portable shortcut profiles for Devigator-compatible editors and providers.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schemaVersion", "profiles"],
   "properties": {
-    "schemaVersion": {"enum": ["1.0", "1.1"]},
+    "schemaVersion": {"enum": ["1.0", "1.1", "1.2"]},
     "profiles": {
       "type": "array",
       "minItems": 1,
@@ -116,7 +116,27 @@
         "when": {
           "type": "string",
           "description": "Provider-defined context expression. Devigator 1.x preserves this field but does not evaluate it."
+        },
+        "pointerGestures": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/pointerGesture"},
+          "description": "Alternate pointer gestures that invoke the same capability."
         }
+      }
+    },
+    "pointerGesture": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["modifiers", "button", "clickCount"],
+      "properties": {
+        "modifiers": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1},
+          "uniqueItems": true
+        },
+        "button": {"enum": ["primary", "secondary", "middle"]},
+        "clickCount": {"type": "integer", "minimum": 1, "maximum": 3}
       }
     }
   }

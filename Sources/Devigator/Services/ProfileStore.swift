@@ -150,7 +150,10 @@ final class ProfileStore: ObservableObject {
                         keys: ["⌘", "B"],
                         description: nil,
                         tags: ["navigation"],
-                        commandID: nil
+                        commandID: nil,
+                        pointerGestures: [
+                            .init(modifiers: ["⌘"], button: .primary, clickCount: 1)
+                        ]
                     )
                 ])
             ]

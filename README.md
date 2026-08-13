@@ -51,7 +51,7 @@ IDE plugins and vendors can publish profiles into:
 ~/Library/Application Support/Devigator/Profiles/Providers/<provider-id>/
 ```
 
-User-owned profiles live under `Profiles/User/` and take precedence. Profile schema 1.1 separates canonical `capabilityID`/`categoryID` values from IDE-specific `commandID` values. HUD labels resolve from the built-in English/Korean capability catalog and fall back to the profile text. See [the profile specification](Docs/PROFILE_SPEC.md), [profile JSON Schema](Schemas/devigator-profile.schema.json), and [capability catalog schema](Schemas/devigator-capability-catalog.schema.json).
+User-owned profiles live under `Profiles/User/` and take precedence. Profile schema 1.2 separates canonical `capabilityID`/`categoryID` values from IDE-specific `commandID` values and supports standardized pointer alternatives such as `⌘ + click`. HUD labels resolve from the built-in English/Korean capability catalog and fall back to the profile text. See [the profile specification](Docs/PROFILE_SPEC.md), [profile JSON Schema](Schemas/devigator-profile.schema.json), and [capability catalog schema](Schemas/devigator-capability-catalog.schema.json).
 
 ## Current scope
 

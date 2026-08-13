@@ -53,6 +53,18 @@ struct ShortcutProfile: Codable, Identifiable, Hashable {
     }
 
     struct Shortcut: Codable, Identifiable, Hashable {
+        struct PointerGesture: Codable, Hashable {
+            enum Button: String, Codable, Hashable {
+                case primary
+                case secondary
+                case middle
+            }
+
+            var modifiers: [String]
+            var button: Button
+            var clickCount: Int
+        }
+
         var id: String
         var action: String
         var keys: [String]
@@ -61,6 +73,7 @@ struct ShortcutProfile: Codable, Identifiable, Hashable {
         var commandID: String?
         var capabilityID: String? = nil
         var when: String? = nil
+        var pointerGestures: [PointerGesture]? = nil
     }
 
     var id: String
@@ -93,6 +106,7 @@ enum ProfileValidationError: LocalizedError, Equatable {
     case duplicateGroupID(profile: String, group: String)
     case duplicateShortcutID(profile: String, shortcut: String)
     case emptyKeys(profile: String, shortcut: String)
+    case invalidPointerGesture(profile: String, shortcut: String)
     case invalidPriority(profile: String, priority: Int)
 
     var errorDescription: String? {
@@ -111,6 +125,8 @@ enum ProfileValidationError: LocalizedError, Equatable {
             return "\(profile): 중복된 shortcut id입니다: \(shortcut)"
         case .emptyKeys(let profile, let shortcut):
             return "\(profile): \(shortcut)의 keys가 비어 있습니다."
+        case .invalidPointerGesture(let profile, let shortcut):
+            return "\(profile): \(shortcut)의 pointer gesture clickCount는 1부터 3 사이여야 합니다."
         case .invalidPriority(let profile, let priority):
             return "\(profile): priority \(priority)는 -100부터 100 사이여야 합니다."
         }
@@ -118,8 +134,8 @@ enum ProfileValidationError: LocalizedError, Equatable {
 }
 
 enum ProfileValidator {
-    static let supportedSchemaVersion = "1.1"
-    static let supportedSchemaVersions: Set<String> = ["1.0", "1.1"]
+    static let supportedSchemaVersion = "1.2"
+    static let supportedSchemaVersions: Set<String> = ["1.0", "1.1", "1.2"]
 
     static func validate(_ catalog: ShortcutCatalog) throws {
         guard supportedSchemaVersions.contains(catalog.schemaVersion) else {
@@ -160,6 +176,13 @@ enum ProfileValidator {
                     }
                     guard !shortcut.keys.isEmpty else {
                         throw ProfileValidationError.emptyKeys(
+                            profile: profile.id,
+                            shortcut: shortcut.id
+                        )
+                    }
+                    if let gestures = shortcut.pointerGestures,
+                       gestures.contains(where: { !(1...3).contains($0.clickCount) }) {
+                        throw ProfileValidationError.invalidPointerGesture(
                             profile: profile.id,
                             shortcut: shortcut.id
                         )
